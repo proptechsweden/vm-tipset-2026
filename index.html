@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VM-tipset 2026 | PropTech Sweden</title>
-<meta name="description" content="PropTech Swedens officiella VM-tipstavling 2026. 30 kr insats, stor prispott, bragging rights i hela ekosystemet.">
+<meta name="description" content="PropTech Swedens officiella VM-tipstavling 2026. Gratis att delta. Tippa gruppspelet och vinn en plats pa en nordisk PropTech-konferens.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -56,11 +56,12 @@ section{padding:5rem 0}section+section{border-top:1px solid rgba(240,237,228,0.0
 .points-row .pts{font-family:'Instrument Serif',serif;font-size:1.2rem;color:var(--green)}
 .points-row.header .pts{color:var(--cream);font-family:'Outfit',sans-serif;font-size:0.75rem}
 .prizes{display:grid;gap:1rem}
-.prize{background:var(--surface);border:1px solid rgba(240,237,228,0.06);border-radius:14px;padding:1.5rem;display:flex;justify-content:space-between;align-items:center}
+.prize{background:var(--surface);border:1px solid rgba(240,237,228,0.06);border-radius:14px;padding:1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .prize.first{border-color:rgba(46,204,113,0.3);background:linear-gradient(135deg,var(--surface) 0%,rgba(46,204,113,0.06) 100%)}
-.prize .place{font-weight:600;font-size:0.95rem}
-.prize .amount{font-family:'Instrument Serif',serif;font-size:1.5rem}
-.prize .amount small{font-family:'Outfit',sans-serif;font-size:0.75rem;font-weight:400;color:var(--cream-dim);display:block}
+.prize .place{font-weight:600;font-size:0.95rem;white-space:nowrap}
+.prize .detail{flex:1}
+.prize .detail .prize-title{font-family:'Instrument Serif',serif;font-size:1.3rem;margin-bottom:2px}
+.prize .detail .prize-desc{font-size:0.82rem;color:var(--cream-dim);font-weight:300}
 .medal{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
 .groups-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
 .group-card{background:var(--surface);border:1px solid rgba(240,237,228,0.06);border-radius:12px;overflow:hidden;transition:border-color 0.3s}
@@ -86,60 +87,62 @@ footer a{color:var(--green);text-decoration:none}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
-@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}nav .links{gap:0.75rem}nav .links a{font-size:0.72rem}.groups-grid{grid-template-columns:repeat(2,1fr)}.prize{flex-direction:column;align-items:flex-start;gap:0.5rem}}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}nav .links{gap:0.75rem}nav .links a{font-size:0.72rem}.groups-grid{grid-template-columns:repeat(2,1fr)}.prize{flex-direction:column;align-items:flex-start}}
 </style>
 </head>
 <body>
-<nav><div class="inner"><a href="#" class="brand">PropTech Sweden</a><div class="right"><div class="links"><a href="#hur" id="navHow">S&#229; funkar det</a><a href="#poang" id="navPts">Po&#228;ng</a><a href="#grupper" id="navGrp">Grupper</a><a href="#priser" id="navPrz">Priser</a><a href="#faq">FAQ</a></div><div class="lang-toggle"><button class="lang-btn active" id="btnSv" onclick="setLang('sv')">SV</button><button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button></div></div></div></nav>
+<nav><div class="inner"><a href="#" class="brand">PropTech Sweden</a><div class="right"><div class="links"><a href="#hur" id="navHow"></a><a href="#poang" id="navPts"></a><a href="#grupper" id="navGrp"></a><a href="#priser" id="navPrz"></a><a href="#faq">FAQ</a></div><div class="lang-toggle"><button class="lang-btn active" id="btnSv" onclick="setLang('sv')">SV</button><button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button></div></div></div></nav>
 <div class="container">
 <div class="hero"><div class="tag" id="heroTag"></div><h1 id="heroTitle"></h1><p id="heroDesc"></p><div class="cta-row"><a href="https://app.youform.com/forms/aghv19jm" class="btn-primary" id="heroCta"></a><a href="#hur" class="btn-secondary" id="heroSec"></a></div></div>
-<div class="stats"><div class="stat"><span class="num">48</span><span class="label" id="statTeams"></span></div><div class="stat"><span class="num">72</span><span class="label" id="statMatches"></span></div><div class="stat"><span class="num">30 kr</span><span class="label" id="statEntry"></span></div><div class="stat"><span class="num">100%</span><span class="label" id="statPot"></span></div></div>
-<section id="hur" class="reveal"><div class="section-label" id="secHowLabel"></div><div class="section-title" id="secHowTitle"></div><div class="section-desc" id="secHowDesc"></div><div class="steps" id="stepsBox"></div></section>
-<section id="poang" class="reveal"><div class="section-label" id="secPtsLabel"></div><div class="section-title" id="secPtsTitle"></div><div class="section-desc" id="secPtsDesc"></div><div id="pointsBox"></div></section>
-<section id="grupper" class="reveal"><div class="section-label" id="secGrpLabel"></div><div class="section-title" id="secGrpTitle"></div><div class="section-desc" id="secGrpDesc"></div><div class="groups-grid" id="groupsGrid"></div></section>
-<section id="priser" class="reveal"><div class="section-label" id="secPrzLabel"></div><div class="section-title" id="secPrzTitle"></div><div class="section-desc" id="secPrzDesc"></div><div class="prizes" id="prizesBox"></div><p id="przExample" style="margin-top:1.5rem;font-size:0.85rem;color:var(--cream-faint);font-weight:300"></p></section>
-<section id="tid" class="reveal"><div class="section-label" id="secTlLabel"></div><div class="section-title" id="secTlTitle"></div><div class="timeline" id="tlBox"></div></section>
-<section id="faq" class="reveal"><div class="section-label">FAQ</div><div class="section-title" id="secFaqTitle"></div><div id="faqBox"></div></section>
-<section class="reveal" style="text-align:center;padding:4rem 0 5rem"><div class="section-title" id="ctaTitle" style="margin-bottom:1rem"></div><p id="ctaDesc" style="font-size:1rem;color:var(--cream-dim);font-weight:300;margin-bottom:2rem"></p><a href="https://app.youform.com/forms/aghv19jm" class="btn-primary" id="ctaBtn" style="font-size:1.1rem;padding:16px 40px"></a></section>
+<div class="stats"><div class="stat"><span class="num">48</span><span class="label" id="s1"></span></div><div class="stat"><span class="num">72</span><span class="label" id="s2"></span></div><div class="stat"><span class="num" id="s3v"></span><span class="label" id="s3"></span></div><div class="stat"><span class="num">3</span><span class="label" id="s4"></span></div></div>
+<section id="hur" class="reveal"><div class="section-label" id="howL"></div><div class="section-title" id="howT"></div><div class="section-desc" id="howD"></div><div class="steps" id="stepsBox"></div></section>
+<section id="poang" class="reveal"><div class="section-label" id="ptsL"></div><div class="section-title" id="ptsT"></div><div class="section-desc" id="ptsD"></div><div id="pointsBox"></div></section>
+<section id="grupper" class="reveal"><div class="section-label" id="grpL"></div><div class="section-title" id="grpT"></div><div class="section-desc" id="grpD"></div><div class="groups-grid" id="groupsGrid"></div></section>
+<section id="priser" class="reveal"><div class="section-label" id="przL"></div><div class="section-title" id="przT"></div><div class="section-desc" id="przD"></div><div class="prizes" id="prizesBox"></div></section>
+<section id="tid" class="reveal"><div class="section-label" id="tlL"></div><div class="section-title" id="tlT"></div><div class="timeline" id="tlBox"></div></section>
+<section id="faq" class="reveal"><div class="section-label">FAQ</div><div class="section-title" id="faqT"></div><div id="faqBox"></div></section>
+<section class="reveal" style="text-align:center;padding:4rem 0 5rem"><div class="section-title" id="ctaT" style="margin-bottom:1rem"></div><p id="ctaD" style="font-size:1rem;color:var(--cream-dim);font-weight:300;margin-bottom:2rem"></p><a href="https://app.youform.com/forms/aghv19jm" class="btn-primary" id="ctaB" style="font-size:1.1rem;padding:16px 40px"></a></section>
 </div>
-<footer><div class="container"><p><a href="https://proptechsweden.org" target="_blank">PropTech Sweden</a> &middot; VM-tipset 2026</p><p style="margin-top:6px;font-size:0.75rem" id="footerSub"></p></div></footer>
+<footer><div class="container"><p><a href="https://proptechsweden.org" target="_blank">PropTech Sweden</a> &middot; VM-tipset 2026</p><p style="margin-top:6px;font-size:0.75rem" id="footSub"></p></div></footer>
 <script>
 var L="sv";
 var S={sv:{
 heroTag:"Fotbolls-VM 2026 \u00b7 USA \u00b7 Kanada \u00b7 Mexiko",
 heroTitle:'Hela ekosystemet<br><span>tippar VM.</span>',
-heroDesc:"PropTech Swedens officiella tipst\u00e4vling. 30 kr insats. 72 matcher. Bragging rights f\u00f6r hela sommaren.",
+heroDesc:"PropTech Swedens officiella tipst\u00e4vling. Gratis att delta. Fantastiska priser. Bragging rights f\u00f6r hela sommaren.",
 heroCta:"Tippa nu \u2192",heroSec:"S\u00e5 funkar det",
 navHow:"S\u00e5 funkar det",navPts:"Po\u00e4ng",navGrp:"Grupper",navPrz:"Priser",
-statTeams:"lag",statMatches:"matcher",statEntry:"insats",statPot:"till potten",
-secHowLabel:"Uppl\u00e4gget",secHowTitle:"S\u00e5 funkar det",secHowDesc:"Tv\u00e5 faser. Ingen login. Klart p\u00e5 5 minuter.",
-secPtsLabel:"Po\u00e4ngsystem",secPtsTitle:"Varje r\u00e4tt tips r\u00e4knas",secPtsDesc:"Gruppspelet ger grunden. Slutspelet avg\u00f6r.",
-secGrpLabel:"12 grupper \u00b7 48 lag",secGrpTitle:"Grupperna",secGrpDesc:"Sverige \u00e4r i Grupp F med Nederl\u00e4nderna, Japan och Tunisien.",
-secPrzLabel:"Prispott",secPrzTitle:"Vad vinner man?",secPrzDesc:"30 kr insats. 100 % g\u00e5r till potten. PropTech Sweden sponsrar huvudvinsten.",
-secTlLabel:"Tidsplan",secTlTitle:"Viktiga datum",
-secFaqTitle:"Fr\u00e5gor & svar",
-ctaTitle:"Redo att tippa?",ctaDesc:"Deadline 11 juni. Fyll i dina 72 tips p\u00e5 5 minuter.",ctaBtn:"Tippa nu \u2192",
-footerSub:"Grundat 2019 \u00b7 Det ledande n\u00e4tverket f\u00f6r fastighetsteknologi i Sverige",
-grpSweden:"Sveriges grupp",
+s1:"lag",s2:"matcher",s3v:"Gratis",s3:"att delta",s4:"priser",
+howL:"Uppl\u00e4gget",howT:"S\u00e5 funkar det",howD:"Tv\u00e5 faser. Ingen login. Klart p\u00e5 5 minuter. Helt gratis.",
+ptsL:"Po\u00e4ngsystem",ptsT:"Varje r\u00e4tt tips r\u00e4knas",ptsD:"Gruppspelet ger grunden. Slutspelet avg\u00f6r.",
+grpL:"12 grupper \u00b7 48 lag",grpT:"Grupperna",grpD:"Sverige \u00e4r i Grupp F med Nederl\u00e4nderna, Japan och Tunisien.",
+przL:"Priser",przT:"Vad kan du vinna?",przD:"Alla priser sponsras av PropTech Sweden. Ingen insats kr\u00e4vs.",
+tlL:"Tidsplan",tlT:"Viktiga datum",
+faqT:"Fr\u00e5gor & svar",
+ctaT:"Redo att tippa?",ctaD:"Deadline 11 juni. Helt gratis. Fyll i dina tips p\u00e5 5 minuter.",ctaB:"Tippa nu \u2192",
+footSub:"Grundat 2019 \u00b7 Det ledande n\u00e4tverket f\u00f6r fastighetsteknologi i Sverige",
+grpSwe:"Sveriges grupp",
 steps:[
-["Tippa gruppspelet","Fyll i formul\u00e4ret \u2014 tippa 1, X eller 2 p\u00e5 alla 72 gruppspelsmatcher. Tar ca 5 min."],
-["Swisha 30 kr","Du kan betala via Swisha eller Revolut till med ditt namn som meddelande. Klart."],
-["Kvalgr\u00e4ns 50 %","Tippa vilka 2 lag som g\u00e5r vidare fr\u00e5n varje grupp. F\u00e5 minst 12 av 24 r\u00e4tt s\u00e5 kvalificerar du dig till slutspelstippningen."],
+["Tippa gruppspelet","Fyll i formul\u00e4ret \u2014 tippa 1, X eller 2 p\u00e5 alla 72 gruppspelsmatcher plus vilka 2 lag som g\u00e5r vidare fr\u00e5n varje grupp. Tar ca 5 min."],
+["Kvalgr\u00e4ns 50 %","Tippa r\u00e4tt p\u00e5 minst 12 av 24 lag som g\u00e5r vidare fr\u00e5n gruppspelet s\u00e5 kvalificerar du dig till slutspelstippningen."],
 ["Tippa slutspelet","Kvalificerade f\u00e5r ett nytt formul\u00e4r via mejl. Tippa vilka lag som g\u00e5r vidare i varje runda."],
-["Vinn","H\u00f6gst totalpo\u00e4ng efter finalen 19 juli vinner prispotten plus sponsrad huvudvinst."]
+["Vinn","H\u00f6gst totalpo\u00e4ng efter finalen 19 juli vinner. Topp 3 f\u00e5r priser."]
 ],
 ptsG:[["Gruppspel","Kategori","Po\u00e4ng"],["R\u00e4tt utg\u00e5ng (1 / X / 2)","3 p"],["Bonus: alla tre r\u00e4tt i en grupps matcher","+5 p"]],
 ptsK:[["Slutspel","Kategori","Po\u00e4ng"],["R\u00e4tt lag till \u00e5ttondelsfinal","2 p / lag"],["R\u00e4tt lag till kvartsfinal","5 p / lag"],["R\u00e4tt lag till semifinal","10 p / lag"],["R\u00e4tt finalist","15 p / lag"],["R\u00e4tt v\u00e4rldsm\u00e4stare","25 p"]],
 ptsB:[["Bonusfr\u00e5gor","Fr\u00e5ga","Po\u00e4ng"],["Vem vinner VM?","20 p"],["B\u00e4sta svenska resultat","10 p"],["Skyttekung (r\u00e4tt spelare)","10 p"]],
 ptsMax:"Max m\u00f6jlig po\u00e4ng: 256 (gruppspel) + 137 (slutspel) + 40 (bonus) = <strong style='color:var(--green)'>433 po\u00e4ng</strong>",
-prizes:[["1:a plats","70 % av potten","+ sponsrad huvudvinst fr\u00e5n PropTech Sweden"],["2:a plats","20 %",""],["3:e plats","10 %",""]],
-przEx:"Exempel: 100 deltagare = 1 000 kr pott. 1:a f\u00e5r 700 kr + huvudvinst, 2:a f\u00e5r 200 kr, 3:e f\u00e5r 100 kr.",
-tl:[["Maj 2026","Formul\u00e4ret \u00f6ppnar \u2014 tippa och swisha",1],["11 juni 00:00","Deadline \u2014 formul\u00e4ret st\u00e4nger",0],["11 juni","VM startar \u2014 f\u00f6rsta matchen",0],["~27 juni","Gruppspelet klart \u2014 kvalgr\u00e4ns ber\u00e4knas",0],["~28 juni","Slutspelsformul\u00e4ret skickas ut",0],["19 juli","VM-finalen \u2014 vinnare utses",0]],
+prizes:[
+["1:a plats","Delegation inkl. resa till nordisk PropTech-konferens","Oslo PropTech Summit (21 okt) eller Recotech Helsinki (17 nov) \u2014 biljett, resa och boende"],
+["2:a plats","Biljett till nordisk PropTech-konferens","En biljett till valfri nordisk konferens inom PropTech Sweden-n\u00e4tverket"],
+["3:e plats","Presentkort v\u00e4rde 500 kr","Fr\u00e5n PropTech Sweden"]
+],
+tl:[["Maj 2026","Formul\u00e4ret \u00f6ppnar \u2014 tippa!",1],["11 juni 00:00","Deadline \u2014 formul\u00e4ret st\u00e4nger",0],["11 juni","VM startar",0],["~27 juni","Gruppspelet klart \u2014 kvalgr\u00e4ns ber\u00e4knas",0],["~28 juni","Slutspelsformul\u00e4ret skickas ut",0],["19 juli","VM-finalen \u2014 vinnare utses",0]],
 faq:[
 ["Vem f\u00e5r delta?","Alla i PropTech Swedens ekosystem \u2014 medlemmar, partners, kollegor och v\u00e4nner. Sprid g\u00e4rna l\u00e4nken!"],
-["Beh\u00f6ver jag skapa ett konto?","Nej. Klicka p\u00e5 l\u00e4nken, fyll i formul\u00e4ret, swisha 30 kr. Klart."],
-["Vad h\u00e4nder om jag inte klarar kvalgr\u00e4nsen?","Du m\u00e5ste tippa r\u00e4tt p\u00e5 minst 12 av 24 lag som g\u00e5r vidare fr\u00e5n gruppspelet. Klarar du inte det kan du fortfarande f\u00f6lja topplistan."],
-["Hur f\u00e5r jag veta mitt resultat?","En publik topplista uppdateras l\u00f6pande under turneringen. L\u00e4nk publiceras h\u00e4r och i Slack."],
+["Kostar det n\u00e5got?","Nej, det \u00e4r helt gratis att delta. Alla priser sponsras av PropTech Sweden."],
+["Beh\u00f6ver jag skapa ett konto?","Nej. Klicka p\u00e5 l\u00e4nken, fyll i formul\u00e4ret. Klart p\u00e5 5 minuter."],
+["Vad \u00e4r kvalgr\u00e4nsen?","Du tippar vilka 2 lag som g\u00e5r vidare fr\u00e5n varje grupp. F\u00e5r du minst 12 av 24 r\u00e4tt kvalificerar du dig till slutspelstippningen."],
 ["Vad h\u00e4nder vid lika po\u00e4ng?","Avg\u00f6rs av: 1) flest r\u00e4tt i slutspelet, 2) flest r\u00e4tt i gruppspelet, 3) flest gruppbonusar. Fortfarande lika = priset delas."],
 ["Kan jag \u00e4ndra mitt tips?","Nej, tipset \u00e4r l\u00e5st n\u00e4r du skickat in formul\u00e4ret. T\u00e4nk igenom dina val!"],
 ["Var hittar jag de fullst\u00e4ndiga reglerna?","Det kompletta regeldokumentet finns <a href='#REGEL_PDF_LINK' style='color:var(--green)'>h\u00e4r</a>."]
@@ -147,39 +150,41 @@ faq:[
 },en:{
 heroTag:"FIFA World Cup 2026 \u00b7 USA \u00b7 Canada \u00b7 Mexico",
 heroTitle:'The entire ecosystem<br><span>predicts the World Cup.</span>',
-heroDesc:"PropTech Sweden\u2019s official prediction game. 30 SEK entry. 72 matches. Bragging rights all summer long.",
+heroDesc:"PropTech Sweden\u2019s official prediction game. Free to enter. Amazing prizes. Bragging rights all summer long.",
 heroCta:"Predict now \u2192",heroSec:"How it works",
 navHow:"How it works",navPts:"Points",navGrp:"Groups",navPrz:"Prizes",
-statTeams:"teams",statMatches:"matches",statEntry:"entry fee",statPot:"to the pot",
-secHowLabel:"The format",secHowTitle:"How it works",secHowDesc:"Two phases. No login. Done in 5 minutes.",
-secPtsLabel:"Scoring system",secPtsTitle:"Every correct prediction counts",secPtsDesc:"The group stage builds your base. The knockout stage decides it.",
-secGrpLabel:"12 groups \u00b7 48 teams",secGrpTitle:"The groups",secGrpDesc:"Sweden is in Group F with the Netherlands, Japan and Tunisia.",
-secPrzLabel:"Prize pot",secPrzTitle:"What do you win?",secPrzDesc:"30 SEK entry. 100% goes to the pot. PropTech Sweden sponsors the main prize.",
-secTlLabel:"Timeline",secTlTitle:"Key dates",
-secFaqTitle:"Questions & answers",
-ctaTitle:"Ready to predict?",ctaDesc:"Deadline June 11. Fill in your 72 predictions in 5 minutes.",ctaBtn:"Predict now \u2192",
-footerSub:"Founded 2019 \u00b7 The leading network for property technology in Sweden",
-grpSweden:"Sweden\u2019s group",
+s1:"teams",s2:"matches",s3v:"Free",s3:"to enter",s4:"prizes",
+howL:"The format",howT:"How it works",howD:"Two phases. No login. Done in 5 minutes. Completely free.",
+ptsL:"Scoring system",ptsT:"Every correct prediction counts",ptsD:"The group stage builds your base. The knockout stage decides it.",
+grpL:"12 groups \u00b7 48 teams",grpT:"The groups",grpD:"Sweden is in Group F with the Netherlands, Japan and Tunisia.",
+przL:"Prizes",przT:"What can you win?",przD:"All prizes are sponsored by PropTech Sweden. No entry fee required.",
+tlL:"Timeline",tlT:"Key dates",
+faqT:"Questions & answers",
+ctaT:"Ready to predict?",ctaD:"Deadline June 11. Completely free. Fill in your predictions in 5 minutes.",ctaB:"Predict now \u2192",
+footSub:"Founded 2019 \u00b7 The leading network for property technology in Sweden",
+grpSwe:"Sweden\u2019s group",
 steps:[
-["Predict the group stage","Fill in the form \u2014 predict 1, X or 2 for all 72 group stage matches. Takes about 5 min."],
-["Swish 30 SEK", "You can pay via Swish or Revolut, using your name as the payment reference. Done."],
-["Qualification threshold 50%","Predict which 2 teams advance from each group. Get at least 12 out of 24 right to qualify for the knockout prediction round."],
+["Predict the group stage","Fill in the form \u2014 predict 1, X or 2 for all 72 group matches plus which 2 teams advance from each group. Takes about 5 min."],
+["Qualification threshold 50%","Correctly predict at least 12 out of 24 teams advancing from the group stage to qualify for the knockout prediction round."],
 ["Predict the knockouts","Qualified participants receive a new form via email. Predict which teams advance each round."],
-["Win","Highest total score after the final on July 19 wins the prize pot plus the sponsored main prize."]
+["Win","Highest total score after the final on July 19 wins. Top 3 receive prizes."]
 ],
 ptsG:[["Group stage","Category","Points"],["Correct outcome (1 / X / 2)","3 pts"],["Bonus: all three correct in one group\u2019s matches","+5 pts"]],
 ptsK:[["Knockouts","Category","Points"],["Correct round of 16 team","2 pts / team"],["Correct quarter-finalist","5 pts / team"],["Correct semi-finalist","10 pts / team"],["Correct finalist","15 pts / team"],["Correct world champion","25 pts"]],
 ptsB:[["Bonus questions","Question","Points"],["Who wins the World Cup?","20 pts"],["Best Swedish result","10 pts"],["Top scorer (correct player)","10 pts"]],
 ptsMax:"Maximum possible score: 256 (group stage) + 137 (knockouts) + 40 (bonus) = <strong style='color:var(--green)'>433 points</strong>",
-prizes:[["1st place","70% of the pot","+ sponsored main prize from PropTech Sweden"],["2nd place","20%",""],["3rd place","10%",""]],
-przEx:"Example: 100 participants = 1,000 SEK pot. 1st gets 700 SEK + main prize, 2nd gets 200 SEK, 3rd gets 100 SEK.",
-tl:[["May 2026","Form opens \u2014 predict and pay",1],["June 11 00:00","Deadline \u2014 form closes",0],["June 11","World Cup kicks off",0],["~June 27","Group stage ends \u2014 qualification calculated",0],["~June 28","Knockout form sent to qualified participants",0],["July 19","World Cup final \u2014 winner announced",0]],
+prizes:[
+["1st place","Delegation incl. trip to a Nordic PropTech conference","Oslo PropTech Summit (Oct 21) or Recotech Helsinki (Nov 17) \u2014 ticket, travel and accommodation"],
+["2nd place","Ticket to a Nordic PropTech conference","One ticket to a Nordic conference within the PropTech Sweden network"],
+["3rd place","Gift card worth 500 SEK","From PropTech Sweden"]
+],
+tl:[["May 2026","Form opens \u2014 start predicting!",1],["June 11 00:00","Deadline \u2014 form closes",0],["June 11","World Cup kicks off",0],["~June 27","Group stage ends \u2014 qualification calculated",0],["~June 28","Knockout form sent to qualified participants",0],["July 19","World Cup final \u2014 winner announced",0]],
 faq:[
 ["Who can participate?","Everyone in PropTech Sweden\u2019s ecosystem \u2014 members, partners, colleagues and friends. Feel free to share the link!"],
-["Do I need to create an account?","No. Click the link, fill in the form, Swish 30 SEK. Done."],
-["What if I don\u2019t pass the qualification threshold?","You need to correctly predict at least 12 out of 24 teams advancing from the group stage. If you don\u2019t qualify, you can still follow the leaderboard."],
-["How do I see my results?","A public leaderboard is updated throughout the tournament. Link will be published here and on Slack."],
-["What happens if scores are tied?","Decided by: 1) most correct in knockouts, 2) most correct in group stage, 3) most group bonuses. Still tied = prize is split."],
+["Does it cost anything?","No, it\u2019s completely free to enter. All prizes are sponsored by PropTech Sweden."],
+["Do I need to create an account?","No. Click the link, fill in the form. Done in 5 minutes."],
+["What is the qualification threshold?","You predict which 2 teams advance from each group. Get at least 12 out of 24 right and you qualify for the knockout prediction round."],
+["What happens if scores are tied?","Decided by: 1) most correct in knockouts, 2) most correct in group stage, 3) most group bonuses. Still tied = prize is shared."],
 ["Can I change my predictions?","No, your entry is locked once submitted. Think it through!"],
 ["Where can I find the full rules?","The complete rules document is available <a href='#REGEL_PDF_LINK' style='color:var(--green)'>here</a>."]
 ]
@@ -198,41 +203,34 @@ var G=[
 {id:"K",t:["Portugal","Colombia","Uzbekistan","DR Kongo"]},
 {id:"L",t:["England","Kroatien","Panama","Ghana"]}
 ];
-function txt(id,k){var e=document.getElementById(id);if(e)e.innerHTML=S[L][k]}
-function ptsTbl(d){var h='<h3 style="font-size:0.95rem;font-weight:600;margin:2rem 0 0.75rem;color:var(--cream-faint)">'+d[0][0]+'</h3><div class="points-grid"><div class="points-row header"><span class="cat">'+d[0][1]+'</span><span class="pts">'+d[0][2]+'</span></div>';for(var i=1;i<d.length;i++)h+='<div class="points-row"><span class="cat">'+d[i][0]+'</span><span class="pts">'+d[i][1]+'</span></div>';return h+'</div>'}
+function el(id){return document.getElementById(id)}
+function tx(id,k){var e=el(id);if(e)e.innerHTML=S[L][k]}
+function ptbl(d){var h='<h3 style="font-size:0.95rem;font-weight:600;margin:2rem 0 0.75rem;color:var(--cream-faint)">'+d[0][0]+'</h3><div class="points-grid"><div class="points-row header"><span class="cat">'+d[0][1]+'</span><span class="pts">'+d[0][2]+'</span></div>';for(var i=1;i<d.length;i++)h+='<div class="points-row"><span class="cat">'+d[i][0]+'</span><span class="pts">'+d[i][1]+'</span></div>';return h+'</div>'}
 function render(){
 var s=S[L];
-txt("heroTag","heroTag");txt("heroTitle","heroTitle");txt("heroDesc","heroDesc");txt("heroCta","heroCta");txt("heroSec","heroSec");
-document.getElementById("navHow").textContent=s.navHow;document.getElementById("navPts").textContent=s.navPts;document.getElementById("navGrp").textContent=s.navGrp;document.getElementById("navPrz").textContent=s.navPrz;
-txt("statTeams","statTeams");txt("statMatches","statMatches");txt("statEntry","statEntry");txt("statPot","statPot");
-txt("secHowLabel","secHowLabel");txt("secHowTitle","secHowTitle");txt("secHowDesc","secHowDesc");
-txt("secPtsLabel","secPtsLabel");txt("secPtsTitle","secPtsTitle");txt("secPtsDesc","secPtsDesc");
-txt("secGrpLabel","secGrpLabel");txt("secGrpTitle","secGrpTitle");txt("secGrpDesc","secGrpDesc");
-txt("secPrzLabel","secPrzLabel");txt("secPrzTitle","secPrzTitle");txt("secPrzDesc","secPrzDesc");
-txt("secTlLabel","secTlLabel");txt("secTlTitle","secTlTitle");
-txt("secFaqTitle","secFaqTitle");
-txt("ctaTitle","ctaTitle");txt("ctaDesc","ctaDesc");txt("ctaBtn","ctaBtn");
-txt("footerSub","footerSub");
-var sb=document.getElementById("stepsBox");sb.innerHTML="";
+tx("heroTag","heroTag");tx("heroTitle","heroTitle");tx("heroDesc","heroDesc");tx("heroCta","heroCta");tx("heroSec","heroSec");
+el("navHow").textContent=s.navHow;el("navPts").textContent=s.navPts;el("navGrp").textContent=s.navGrp;el("navPrz").textContent=s.navPrz;
+tx("s1","s1");tx("s2","s2");tx("s3v","s3v");tx("s3","s3");tx("s4","s4");
+tx("howL","howL");tx("howT","howT");tx("howD","howD");
+tx("ptsL","ptsL");tx("ptsT","ptsT");tx("ptsD","ptsD");
+tx("grpL","grpL");tx("grpT","grpT");tx("grpD","grpD");
+tx("przL","przL");tx("przT","przT");tx("przD","przD");
+tx("tlL","tlL");tx("tlT","tlT");tx("faqT","faqT");
+tx("ctaT","ctaT");tx("ctaD","ctaD");tx("ctaB","ctaB");tx("footSub","footSub");
+var sb=el("stepsBox");sb.innerHTML="";
 s.steps.forEach(function(x,i){sb.innerHTML+='<div class="step"><div class="step-num">'+(i+1)+'</div><div><h3>'+x[0]+'</h3><p>'+x[1]+'</p></div></div>'});
-var pb=document.getElementById("pointsBox");
-pb.innerHTML=ptsTbl(s.ptsG)+ptsTbl(s.ptsK)+ptsTbl(s.ptsB)+'<p style="margin-top:1.5rem;font-size:0.85rem;color:var(--cream-faint);font-weight:300">'+s.ptsMax+'</p>';
-var gg=document.getElementById("groupsGrid");gg.innerHTML="";
-G.forEach(function(g){var c=document.createElement("div");c.className="group-card"+(g.hl?" highlight":"");c.innerHTML='<div class="gh">Group '+g.id+(g.hl?" \u2014 "+s.grpSweden:"")+'</div>'+g.t.map(function(t){return'<div class="gt">'+t+'</div>'}).join("");gg.appendChild(c)});
-var pz=document.getElementById("prizesBox");pz.innerHTML="";var ms=["var(--gold)","var(--silver)","var(--bronze)"];
-s.prizes.forEach(function(p,i){pz.innerHTML+='<div class="prize'+(i===0?" first":"")+'"><div><span class="medal" style="background:'+ms[i]+'"></span><span class="place">'+p[0]+'</span></div><div class="amount">'+p[1]+(p[2]?'<small>'+p[2]+'</small>':'')+'</div></div>'});
-document.getElementById("przExample").innerHTML=s.przEx;
-var tl=document.getElementById("tlBox");tl.innerHTML="";
+el("pointsBox").innerHTML=ptbl(s.ptsG)+ptbl(s.ptsK)+ptbl(s.ptsB)+'<p style="margin-top:1.5rem;font-size:0.85rem;color:var(--cream-faint);font-weight:300">'+s.ptsMax+'</p>';
+var gg=el("groupsGrid");gg.innerHTML="";
+G.forEach(function(g){var c=document.createElement("div");c.className="group-card"+(g.hl?" highlight":"");c.innerHTML='<div class="gh">Group '+g.id+(g.hl?" \u2014 "+s.grpSwe:"")+'</div>'+g.t.map(function(t){return'<div class="gt">'+t+'</div>'}).join("");gg.appendChild(c)});
+var pz=el("prizesBox");pz.innerHTML="";
+var ms=["var(--gold)","var(--silver)","var(--bronze)"];
+s.prizes.forEach(function(p,i){pz.innerHTML+='<div class="prize'+(i===0?" first":"")+'"><div><span class="medal" style="background:'+ms[i]+'"></span><span class="place">'+p[0]+'</span></div><div class="detail"><div class="prize-title">'+p[1]+'</div><div class="prize-desc">'+p[2]+'</div></div></div>'});
+var tl=el("tlBox");tl.innerHTML="";
 s.tl.forEach(function(t){tl.innerHTML+='<div class="tl-item'+(t[2]?" active":"")+'"><div class="tl-dot"></div><div><div class="tl-date">'+t[0]+'</div><div class="tl-text">'+t[1]+'</div></div></div>'});
-var fq=document.getElementById("faqBox");fq.innerHTML="";
+var fq=el("faqBox");fq.innerHTML="";
 s.faq.forEach(function(f){fq.innerHTML+='<div class="faq-item"><div class="faq-q">'+f[0]+'</div><div class="faq-a">'+f[1]+'</div></div>'});
 }
-function setLang(l){
-L=l;document.documentElement.lang=l;
-document.getElementById("btnSv").classList.toggle("active",l==="sv");
-document.getElementById("btnEn").classList.toggle("active",l==="en");
-render();
-}
+function setLang(l){L=l;document.documentElement.lang=l;el("btnSv").classList.toggle("active",l==="sv");el("btnEn").classList.toggle("active",l==="en");render()}
 setLang("sv");
 var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target)}})},{threshold:0.15});
 document.querySelectorAll(".reveal").forEach(function(el){obs.observe(el)});
